@@ -8,16 +8,6 @@
         "resolved": "2.1.8",
         "contentHash": "YqagNXs9InxmqkXzq7kLveImxnodkBEicAhydMXVp7dFjC7xb76U6zGgAax4/BWIWfZeWzr5DJyQSev31kj81A=="
       },
-      "DiscordRichPresence": {
-        "type": "Direct",
-        "requested": "[1.0.175, )",
-        "resolved": "1.0.175",
-        "contentHash": "qSWobPTbvHh9gOoBYT8C8eUhKtVdBI/WvW7GY9lNMEtsZIpL6nxCvYJwjsGL3dqlEAGY5k0vdq+wnuDLVBSV2w==",
-        "dependencies": {
-          "Microsoft.Win32.Registry": "4.5.0",
-          "Newtonsoft.Json": "12.0.2"
-        }
-      },
       "Microsoft.Win32.Registry": {
         "type": "Direct",
         "requested": "[5.0.0, )",
@@ -913,6 +903,13 @@
           "System.Text.Encoding": "4.0.11",
           "System.Threading": "4.0.11",
           "System.Xml.ReaderWriter": "4.0.11"
+        }
+      },
+      "discordrpc": {
+        "type": "Project",
+        "dependencies": {
+          "Microsoft.Win32.Registry": "[4.5.0, )",
+          "Newtonsoft.Json": "[13.0.1, )"
         }
       }
     }

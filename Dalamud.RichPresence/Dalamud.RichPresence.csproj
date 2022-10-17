@@ -33,7 +33,7 @@
     
     <ItemGroup>
         <PackageReference Include="DalamudPackager" Version="2.1.8"/>
-        <PackageReference GeneratePathProperty="true" Include="DiscordRichPresence" Version="1.0.175"/>
+		<ProjectReference Include="..\lib\discord-rpc-csharp\DiscordRPC\DiscordRPC.csproj" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.1"/>
 		<PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0"/>
 		<PackageReference Include="NCalcSync" Version="2.0.0"/>
