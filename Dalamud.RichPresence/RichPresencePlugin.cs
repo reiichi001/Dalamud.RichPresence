@@ -89,8 +89,6 @@ namespace Dalamud.RichPresence
             Territories = DataManager.GetExcelSheet<TerritoryType>().ToList();
         }
 
-        public string Name => "Discord Rich Presence";
-
         public void Dispose()
         {
             DalamudPluginInterface.LanguageChanged -= ReregisterCommand;
