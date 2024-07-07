@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-
+using Dalamud.Game;
 using Newtonsoft.Json;
 
 using Dalamud.RichPresence.Models;
