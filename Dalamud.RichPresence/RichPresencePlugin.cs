@@ -22,7 +22,7 @@ namespace Dalamud.RichPresence
     internal class RichPresencePlugin : IDalamudPlugin, IDisposable
     {
         [PluginService]
-        internal static DalamudPluginInterface DalamudPluginInterface { get; private set; }
+        internal static IDalamudPluginInterface DalamudPluginInterface { get; private set; }
 
         [PluginService]
         internal static IClientState ClientState { get; private set; }
