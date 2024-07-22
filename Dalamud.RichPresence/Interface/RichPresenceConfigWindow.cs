@@ -4,6 +4,7 @@ using ImGuiNET;
 
 using Dalamud.RichPresence.Configuration;
 using Dalamud.RichPresence.Models;
+using Dalamud.Interface.Utility;
 
 namespace Dalamud.RichPresence.Interface
 {
@@ -24,11 +25,13 @@ namespace Dalamud.RichPresence.Interface
                 return;
             }
 
-            ImGui.SetNextWindowSize(new Vector2(750, 520));
+            
+
+            ImGui.SetNextWindowSize(ImGuiHelpers.ScaledVector2(750, 520));
             var imGuiReady = ImGui.Begin(
                 RichPresencePlugin.LocalizationManager.Localize("DalamudRichPresenceConfiguration", LocalizationLanguage.Plugin),
                 ref IsOpen,
-                ImGuiWindowFlags.NoCollapse | ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoScrollbar
+                ImGuiWindowFlags.NoCollapse | ImGuiWindowFlags.AlwaysAutoResize | ImGuiWindowFlags.NoScrollbar
             );
 
             if (imGuiReady)
@@ -37,9 +40,9 @@ namespace Dalamud.RichPresence.Interface
                 ImGui.Text(RichPresencePlugin.LocalizationManager.Localize("DalamudRichPresencePreface2", LocalizationLanguage.Plugin));
                 ImGui.Separator();
 
-                ImGui.BeginChild("scrolling", new Vector2(0, 400), true, ImGuiWindowFlags.HorizontalScrollbar);
+                ImGui.BeginChild("scrolling", ImGuiHelpers.ScaledVector2(0, 400), true, ImGuiWindowFlags.HorizontalScrollbar);
 
-                ImGui.PushStyleVar(ImGuiStyleVar.ItemSpacing, new Vector2(1, 3));
+                ImGui.PushStyleVar(ImGuiStyleVar.ItemSpacing, ImGuiHelpers.ScaledVector2(1, 3));
 
                 ImGui.Checkbox(RichPresencePlugin.LocalizationManager.Localize("DalamudRichPresenceShowName", LocalizationLanguage.Plugin), ref RichPresenceConfig.ShowName);
                 ImGui.Checkbox(RichPresencePlugin.LocalizationManager.Localize("DalamudRichPresenceShowFreeCompany", LocalizationLanguage.Plugin), ref RichPresenceConfig.ShowFreeCompany);
