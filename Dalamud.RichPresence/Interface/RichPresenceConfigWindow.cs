@@ -67,10 +67,10 @@ namespace Dalamud.RichPresence.Interface
 
                 if (ImGui.Button(RichPresencePlugin.LocalizationManager.Localize("DalamudRichPresenceSaveAndClose", LocalizationLanguage.Plugin)))
                 {
-                    this.Close();
-                    RichPresencePlugin.DalamudPluginInterface.SavePluginConfig(RichPresenceConfig);
+                    RichPresencePlugin.DalamudPluginInterface.SavePluginConfig(this.RichPresenceConfig);
                     RichPresencePlugin.RichPresenceConfig = this.RichPresenceConfig;
                     RichPresencePlugin.PluginLog.Information("Settings saved.");
+                    this.Close();
                 }
 
                 ImGui.End();
