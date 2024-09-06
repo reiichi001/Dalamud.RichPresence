@@ -122,5 +122,13 @@
   "DalamudRichPresenceShowLoginQueuePositionDetail": {
     "message": "This integration requires the Waitingway plugin to be installed.",
     "description": "Dalamud.RichPresence.Configuration.ShowLoginQueuePositionDetail"
+  },
+  "DalamudRichPresenceRPCBridgeEnabled": {
+    "message": "Enable WINE RPC Bridge",
+    "description": "Dalamud.RichPresence.Configuration.RPCBridgeEnabled"
+  },
+  "DalamudRichPresenceRPCBridgeEnabledDetail": {
+    "message": "Enable support for rich presence when running the game on Linux or MacOS (Applies on plugin restart).",
+    "description": "Dalamud.RichPresence.Configuration.RPCBridgeEnabledDetail"
   }
 }

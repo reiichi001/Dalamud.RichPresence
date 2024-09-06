@@ -31,5 +31,6 @@ namespace Dalamud.RichPresence.Configuration
 
         public bool ShowAfk = true;
         public bool HideEntirelyWhenAfk = false;
+        public bool RPCBridgeEnabled = true;
     }
 }

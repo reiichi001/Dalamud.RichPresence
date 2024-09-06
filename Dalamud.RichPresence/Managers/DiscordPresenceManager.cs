@@ -1,5 +1,7 @@
 ﻿using System;
-
+using System.Diagnostics;
+using System.IO;
+using Dalamud.Utility;
 using DiscordRPC;
 using DiscordRPC.Logging;
 
@@ -7,12 +9,20 @@ namespace Dalamud.RichPresence.Managers
 {
     internal class DiscordPresenceManager : IDisposable
     {
+        private DirectoryInfo RPC_BRIDGE_PATH => new(Path.Combine(RichPresencePlugin.DalamudPluginInterface.AssemblyLocation.Directory!.FullName, "binaries", "WineRPCBridge.exe"));
+
         private const string DISCORD_CLIENT_ID = "478143453536976896";
         private DiscordRpcClient RpcClient;
+        private Process? bridgeProcess;
 
         internal DiscordPresenceManager()
         {
             this.CreateClient();
+
+            if (Util.IsWine() && RichPresencePlugin.RichPresenceConfig.RPCBridgeEnabled)
+            {
+                this.StartWineRPCBridge();
+            }
         }
 
         private void CreateClient()
@@ -36,6 +46,35 @@ namespace Dalamud.RichPresence.Managers
             {
                 // Connect to the RPC
                 RpcClient.Initialize();
+            }
+        }
+
+        public void StartWineRPCBridge()
+        {
+            try
+            {
+                // Check if bridge is already running.
+                var wineBridge = Process.GetProcessesByName(this.RPC_BRIDGE_PATH.Name);
+                if (wineBridge.Length > 0)
+                {
+                    RichPresencePlugin.PluginLog.Information($"Found existing RPC bridge process, PID: {wineBridge[0].Id}, not starting a new one.");
+                    this.bridgeProcess = wineBridge[0];
+                    return;
+                }
+
+                // Start the bridge.
+                RichPresencePlugin.PluginLog.Information($"Starting RPC bridge process: {this.RPC_BRIDGE_PATH}");
+                this.bridgeProcess = Process.Start(new ProcessStartInfo
+                {
+                    FileName = this.RPC_BRIDGE_PATH.FullName,
+                    UseShellExecute = false,
+                    CreateNoWindow = true,
+                })!;
+                RichPresencePlugin.PluginLog.Information($"Started RPC bridge process, PID: {this.bridgeProcess.Id}");
+            }
+            catch (Exception e)
+            {
+                RichPresencePlugin.PluginLog.Error(e, "Error starting Wine bridge process.");
             }
         }
 
@@ -65,6 +104,12 @@ namespace Dalamud.RichPresence.Managers
 
         public void Dispose()
         {
+            if (this.bridgeProcess is not null)
+            {
+                this.bridgeProcess.Kill();
+                RichPresencePlugin.PluginLog.Information($"Killed RPC bridge process: {this.bridgeProcess.Id}");
+            }
+
             RpcClient?.Dispose();
         }
     }
