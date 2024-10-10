@@ -124,11 +124,11 @@
     "description": "Dalamud.RichPresence.Configuration.ShowLoginQueuePositionDetail"
   },
   "DalamudRichPresenceRPCBridgeEnabled": {
-    "message": "Enable WINE RPC Bridge",
+    "message": "Enable WINE RPC Bridge (Linux)",
     "description": "Dalamud.RichPresence.Configuration.RPCBridgeEnabled"
   },
   "DalamudRichPresenceRPCBridgeEnabledDetail": {
-    "message": "Enable support for rich presence when running the game on Linux or MacOS (Applies on plugin restart).",
+    "message": "Enable support for rich presence when running the game on Linux (Applies on plugin restart). For macOS users, please enable the wine bridge from XIV On Mac's settings instead.",
     "description": "Dalamud.RichPresence.Configuration.RPCBridgeEnabledDetail"
   }
 }

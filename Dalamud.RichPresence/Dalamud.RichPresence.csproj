@@ -5,7 +5,7 @@
         <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
         <ProduceReferenceAssembly>false</ProduceReferenceAssembly>
         <NoWarn>IDE0003</NoWarn>
-        <AssemblyVersion>2.0.4.1</AssemblyVersion>
+        <AssemblyVersion>2.0.5.0</AssemblyVersion>
         <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
         <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
     </PropertyGroup>
@@ -17,6 +17,7 @@
         <DefineConstants>DEBUG;TRACE</DefineConstants>
         <ErrorReport>prompt</ErrorReport>
         <WarningLevel>4</WarningLevel>
+        <PlatformTarget>AnyCPU</PlatformTarget>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' " Label="Build">
         <DebugSymbols>true</DebugSymbols>
@@ -29,18 +30,8 @@
     </PropertyGroup>
 
   <Target Name="DownloadWineDiscordIpcBridge" AfterTargets="AfterBuild">
-      <DownloadFile
-          SourceUrl="https://github.com/0e4ef622/wine-discord-ipc-bridge/releases/latest/download/winediscordipcbridge.exe"
-          DestinationFolder="$(OutDir)binaries" 
-          DestinationFileName="WineRPCBridge.exe" 
-          Condition="!Exists('$(OutDir)binaries\WineRPCBridge.exe')"
-      />
-      <DownloadFile
-          SourceUrl="https://raw.githubusercontent.com/0e4ef622/wine-discord-ipc-bridge/master/LICENSE"
-          DestinationFolder="$(OutDir)binaries"
-          DestinationFileName="WineRPCBridgeLICENSE.txt"
-          Condition="!Exists('$(OutDir)binaries\WineRPCBridgeLICENSE.txt')"
-      />
+      <DownloadFile SourceUrl="https://github.com/0e4ef622/wine-discord-ipc-bridge/releases/latest/download/winediscordipcbridge.exe" DestinationFolder="$(OutDir)binaries" DestinationFileName="WineRPCBridge.exe" Condition="!Exists('$(OutDir)binaries\WineRPCBridge.exe')" />
+      <DownloadFile SourceUrl="https://raw.githubusercontent.com/0e4ef622/wine-discord-ipc-bridge/master/LICENSE" DestinationFolder="$(OutDir)binaries" DestinationFileName="WineRPCBridgeLICENSE.txt" Condition="!Exists('$(OutDir)binaries\WineRPCBridgeLICENSE.txt')" />
   </Target>
 
     <ItemGroup>
