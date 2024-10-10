@@ -6,6 +6,8 @@
   "InternalName": "Dalamud.RichPresence",
   "ApplicableVersion": "any",
   "RepoUrl": "https://github.com/goaaats/Dalamud.RichPresence",
-  "Changelog": "API 10 compatibility",
-  "Tags": [ "Discord" ]
+  "Changelog": "Add support for Rich Presence when the plugin is ran under WINE (@Blooym)",
+  "Tags": [
+    "Discord"
+  ]
 }
