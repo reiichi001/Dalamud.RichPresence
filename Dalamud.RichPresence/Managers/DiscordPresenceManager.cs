@@ -9,7 +9,7 @@ namespace Dalamud.RichPresence.Managers
 {
     internal class DiscordPresenceManager : IDisposable
     {
-        private DirectoryInfo RPC_BRIDGE_PATH => new(Path.Combine(RichPresencePlugin.DalamudPluginInterface.AssemblyLocation.Directory!.FullName, "binaries", "WineRPCBridge.exe"));
+        private DirectoryInfo RPC_BRIDGE_PATH => new(Path.Combine(RichPresencePlugin.DalamudPluginInterface.AssemblyLocation.Directory!.FullName, "Resources/binaries", "WineRPCBridge.exe"));
 
         private const string DISCORD_CLIENT_ID = "478143453536976896";
         private DiscordRpcClient RpcClient;
