@@ -387,11 +387,12 @@ namespace Dalamud.RichPresence
                     }
                 }
 
-                var onlineStatusEn = localPlayer.OnlineStatus.Value.Name.ToString();
-                var isAfk = onlineStatusEn != null && onlineStatusEn.Contains("Away from Keyboard");
+                var onlineStatus = localPlayer.OnlineStatus.Value.Icon;
+                var onlineStatusText = localPlayer.OnlineStatus.Value.Name.ToString();
+                bool isAfk = onlineStatus == 61511;
                 if (RichPresenceConfig.ShowAfk && isAfk)
                 {
-                    richPresence.State = onlineStatusEn;
+                    richPresence.State = onlineStatusText;
                     richPresence.Assets.SmallImageKey = "away";
                 }
 
