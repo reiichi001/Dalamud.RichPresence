@@ -346,7 +346,10 @@ namespace Dalamud.RichPresence
                             partyMax = PartyList.Length;
                         }
 
-                        richPresence.State = LocalizationManager.Localize("DalamudRichPresenceInADuty", LocalizationLanguage.Client);
+                        if (cfcTerri.Name.ToString() != null)
+                        {
+                            richPresence.State = LocalizationManager.Localize("DalamudRichPresenceInADuty", LocalizationLanguage.Client);
+                        }
 
                         var party = new Party
                         {
