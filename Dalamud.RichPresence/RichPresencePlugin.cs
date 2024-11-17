@@ -281,7 +281,7 @@ namespace Dalamud.RichPresence
 
                     // Set large image to territory
                     richPresenceLargeImageText = territoryName;
-                    richPresenceLargeImageKey = $"li_{territory.LoadingImage}";
+                    richPresenceLargeImageKey = $"li_{territory.LoadingImage.RowId}";
                 }
 
                 // Show character name if configured
@@ -295,7 +295,7 @@ namespace Dalamud.RichPresence
                     // Show free company tag if configured
                     if (RichPresenceConfig.ShowFreeCompany && localPlayer.CurrentWorld.RowId == localPlayer.HomeWorld.RowId)
                     {
-                        var fcTag = localPlayer.CompanyTag.ToString();
+                        var fcTag = localPlayer.CompanyTag.TextValue;
 
                         // Append free company tag to player name if it exists
                         richPresenceDetails = string.IsNullOrEmpty(fcTag) ? richPresenceDetails : $"{richPresenceDetails} «{fcTag}»";
@@ -321,7 +321,7 @@ namespace Dalamud.RichPresence
                     // Abbreviate job name if configured
                     richPresenceSmallImageText = RichPresenceConfig.AbbreviateJob
                         ? ClassJobSheet.GetRow(localPlayer.ClassJob.RowId).Abbreviation.ExtractText()
-                        : LocalizationManager.TitleCase(ClassJobSheet.GetRow(localPlayer.ClassJob.RowId).Name.ExtractText());
+                        : LocalizationManager.TitleCase(localPlayer.ClassJob.Value.ToString());
                     
 
                     // Show current job level if configured
