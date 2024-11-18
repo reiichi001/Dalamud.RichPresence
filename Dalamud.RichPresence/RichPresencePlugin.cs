@@ -320,10 +320,10 @@ namespace Dalamud.RichPresence
 
                     // Abbreviate job name if configured
                     richPresenceSmallImageText = RichPresenceConfig.AbbreviateJob
-                        ? ClassJobSheet.GetRow(localPlayer.ClassJob.RowId).Abbreviation.ExtractText()
-                        : LocalizationManager.TitleCase(localPlayer.ClassJob.Value.ToString());
+                        ? localPlayer.ClassJob.Value.Abbreviation.ExtractText()
+                        : LocalizationManager.TitleCase(localPlayer.ClassJob.Value.Name.ExtractText());
                     
-
+                    
                     // Show current job level if configured
                     if (RichPresenceConfig.ShowLevel)
                     {
