@@ -17,6 +17,7 @@ using Dalamud.RichPresence.Interface;
 using Dalamud.RichPresence.Managers;
 using Dalamud.RichPresence.Models;
 using System.Xml.Linq;
+using Lumina.Extensions;
 
 namespace Dalamud.RichPresence
 {
@@ -59,6 +60,7 @@ namespace Dalamud.RichPresence
         private  Lumina.Excel.ExcelSheet<PlaceName>? PlaceNameSheet;
         private  Lumina.Excel.ExcelSheet<ClassJob>? ClassJobSheet;
         private  Lumina.Excel.ExcelSheet<OnlineStatus>? OnlineStatusSheet;
+        private Lumina.Excel.ExcelSheet<ContentFinderCondition> ContentFinderConditionSheet;
 
 
         private const string DEFAULT_LARGE_IMAGE_KEY = "li_1";
@@ -101,6 +103,7 @@ namespace Dalamud.RichPresence
             PlaceNameSheet = DataManager.GetExcelSheet<PlaceName>();
             ClassJobSheet = DataManager.GetExcelSheet<ClassJob>();
             OnlineStatusSheet = DataManager.GetExcelSheet<OnlineStatus>();
+            ContentFinderConditionSheet = DataManager.GetExcelSheet<ContentFinderCondition>();
     }
 
     public void Dispose()
@@ -358,10 +361,20 @@ namespace Dalamud.RichPresence
                 {
                     if (PartyList.Length > 0 && PartyList.PartyId != 0)
                     {
-                        var cfcTerri = DataManager.Excel.GetSheet<ContentFinderCondition>()!
-                            .FirstOrDefault(x => x.TerritoryType.RowId == ClientState.TerritoryType);
+                        var cfcTerri = ContentFinderConditionSheet!.FirstOrNull(x => x.TerritoryType.RowId == ClientState.TerritoryType);
 
-                        var partyMax = cfcTerri.ContentType.RowId == 2 ? 4 : 8;
+                        
+                        if (cfcTerri != null)
+                        {
+                            PluginLog.Debug($"current CS Terri:{ClientState.TerritoryType}");
+                            PluginLog.Debug($"cfcTerriRow:{(cfcTerri.HasValue ? cfcTerri.Value.RowId : 9999999999)}");
+                            PluginLog.Debug($"cfcTerriContentMemberType:{cfcTerri?.ContentMemberType.Value}");
+                            PluginLog.Debug($"cfcTerriContentTypeRow:{cfcTerri?.ContentType.RowId}");
+                            PluginLog.Debug($"cfcTerriContentTypeRow:{cfcTerri?.ContentType.Value}");
+                        }
+                        
+
+                        var partyMax = cfcTerri != null && cfcTerri?.ContentType.RowId == 2 ? 4 : 8;
 
                         if (PartyList.Length > partyMax)
                         {
