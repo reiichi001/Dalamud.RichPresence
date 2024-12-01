@@ -363,7 +363,7 @@ namespace Dalamud.RichPresence
                     {
                         var cfcTerri = ContentFinderConditionSheet!.FirstOrNull(x => x.TerritoryType.RowId == ClientState.TerritoryType);
 
-                        
+                        #if DEBUG
                         if (cfcTerri != null)
                         {
                             PluginLog.Debug($"current CS Terri:{ClientState.TerritoryType}");
@@ -372,7 +372,8 @@ namespace Dalamud.RichPresence
                             PluginLog.Debug($"cfcTerriContentTypeRow:{cfcTerri?.ContentType.RowId}");
                             PluginLog.Debug($"cfcTerriContentTypeRow:{cfcTerri?.ContentType.Value}");
                         }
-                        
+                        #endif
+
 
                         var partyMax = cfcTerri != null && cfcTerri?.ContentType.RowId == 2 ? 4 : 8;
 
