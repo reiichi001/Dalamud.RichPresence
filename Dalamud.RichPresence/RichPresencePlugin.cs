@@ -347,13 +347,15 @@ namespace Dalamud.RichPresence
                 {
                     Details = richPresenceDetails,
                     State = richPresenceState,
-                    Assets = new Assets
+                    // TODO: uncomment these when it works again.
+                    /*Assets broke on 2025-01-23 or around then. 
+                     * Assets = new Assets
                     {
                         LargeImageKey = richPresenceLargeImageKey,
                         LargeImageText = richPresenceLargeImageText,
                         SmallImageKey = richPresenceSmallImageKey,
                         SmallImageText = richPresenceSmallImageText,
-                    },
+                    },*/
                     Timestamps = richPresenceTimestamps,
                 };
 
