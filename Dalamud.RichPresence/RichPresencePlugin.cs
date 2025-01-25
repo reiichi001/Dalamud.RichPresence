@@ -67,12 +67,11 @@ namespace Dalamud.RichPresence
         private const string DEFAULT_SMALL_IMAGE_KEY = "class_0";
         private static readonly DiscordRPC.RichPresence DEFAULT_PRESENCE = new()
         {
-            // TODO: uncomment when assets work again
-            /* Assets = new Assets
+            Assets = new Assets
             {
                 LargeImageKey = DEFAULT_LARGE_IMAGE_KEY,
                 SmallImageKey = DEFAULT_SMALL_IMAGE_KEY,
-            },*/
+            },
         };
 
         public RichPresencePlugin()
@@ -242,12 +241,11 @@ namespace Dalamud.RichPresence
                             LocalizationManager.Localize("DalamudRichPresenceInLoginQueue",
                                 LocalizationLanguage.Client), queuePosition),
                         State = queueEstimateFormatted,
-                        // TODO: uncomment when assets work again
-                        /*Assets = new Assets
+                        Assets = new Assets
                         {
                             LargeImageKey = DEFAULT_LARGE_IMAGE_KEY,
                             SmallImageKey = DEFAULT_SMALL_IMAGE_KEY
-                        },*/
+                        },
                         Timestamps = richPresenceTimestamps
                     };
 
@@ -349,15 +347,13 @@ namespace Dalamud.RichPresence
                 {
                     Details = richPresenceDetails,
                     State = richPresenceState,
-                    // TODO: uncomment when assets work again
-                    /*Assets broke on 2025-01-23 or around then. 
-                     * Assets = new Assets
+                     Assets = new Assets
                     {
                         LargeImageKey = richPresenceLargeImageKey,
                         LargeImageText = richPresenceLargeImageText,
                         SmallImageKey = richPresenceSmallImageKey,
                         SmallImageText = richPresenceSmallImageText,
-                    },*/
+                    },
                     Timestamps = richPresenceTimestamps,
                 };
 
@@ -441,8 +437,7 @@ namespace Dalamud.RichPresence
                 {
                     var text = onlineStatusEn;
                     richPresence.State = text;
-                    // TODO: uncomment when assets work again
-                    //richPresence.Assets.SmallImageKey = "away";
+                    richPresence.Assets.SmallImageKey = "away";
                 }
 
                 if (RichPresenceConfig.HideEntirelyWhenAfk && isAfk)

@@ -8,5 +8,5 @@
   "Tags": [
     "Discord"
   ],
-  "Changelog": "Bump WineRPCBridge version. (Thankyou @blooym)\n\nDisable assets for now. There's an issue with them right now. They'll be enabled in a new update once working again."
+  "Changelog": "Bump WineRPCBridge version. (Thankyou @blooym)"
 }
