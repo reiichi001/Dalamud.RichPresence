@@ -2,7 +2,7 @@
     <PropertyGroup>
         <AssemblyName>Dalamud.RichPresence</AssemblyName>
         <NoWarn>IDE0003</NoWarn>
-        <AssemblyVersion>2.0.6.5</AssemblyVersion>
+        <AssemblyVersion>2.0.6.6</AssemblyVersion>
         <Platforms>x64</Platforms>
     </PropertyGroup>
     <PropertyGroup Label="Documentation">
