@@ -1,9 +1,8 @@
-﻿<Project Sdk="Dalamud.NET.Sdk/12.0.2">
+﻿<Project Sdk="Dalamud.NET.Sdk/13.0.0">
     <PropertyGroup>
         <AssemblyName>Dalamud.RichPresence</AssemblyName>
         <NoWarn>IDE0003</NoWarn>
-        <AssemblyVersion>2.0.6.7</AssemblyVersion>
-        <Platforms>x64</Platforms>
+        <AssemblyVersion>2.0.6.8</AssemblyVersion>
     </PropertyGroup>
     <PropertyGroup Label="Documentation">
         <DocumentationFile />

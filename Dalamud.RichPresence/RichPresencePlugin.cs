@@ -18,31 +18,32 @@ using Dalamud.RichPresence.Managers;
 using Dalamud.RichPresence.Models;
 using System.Xml.Linq;
 using Lumina.Extensions;
+using FFXIVClientStructs.FFXIV.Client.Game;
 
 namespace Dalamud.RichPresence
 {
-    internal class RichPresencePlugin : IDalamudPlugin, IDisposable
+    internal unsafe class RichPresencePlugin : IDalamudPlugin, IDisposable
     {
         [PluginService]
-        internal static IDalamudPluginInterface DalamudPluginInterface { get; private set; }
+        internal static IDalamudPluginInterface DalamudPluginInterface { get; private set; } = null!;
 
         [PluginService]
-        internal static IClientState ClientState { get; private set; }
+        internal static IClientState ClientState { get; private set; } = null!;
 
         [PluginService]
-        internal static ICommandManager CommandManager { get; private set; }
+        internal static ICommandManager CommandManager { get; private set; } = null!;
 
         [PluginService]
-        internal static IDataManager DataManager { get; private set; }
+        internal static IDataManager DataManager { get; private set; } = null!;
 
         [PluginService]
-        internal static IFramework Framework { get; private set; }
+        internal static IFramework Framework { get; private set; } = null!;
 
         [PluginService]
-        internal static IPartyList PartyList { get; private set; }
+        internal static IPartyList PartyList { get; private set; } = null!;
 
         [PluginService]
-        internal static IPluginLog PluginLog { get; private set; }
+        internal static IPluginLog PluginLog { get; private set; } = null!;
 
         internal static LocalizationManager? LocalizationManager { get; private set; }
         internal static DiscordPresenceManager? DiscordPresenceManager { get; private set; }
@@ -61,6 +62,8 @@ namespace Dalamud.RichPresence
         private  Lumina.Excel.ExcelSheet<ClassJob>? ClassJobSheet;
         private  Lumina.Excel.ExcelSheet<OnlineStatus>? OnlineStatusSheet;
         private Lumina.Excel.ExcelSheet<ContentFinderCondition> ContentFinderConditionSheet;
+
+        private static HousingManager* HousingInfo => HousingManager.Instance();
 
 
         private const string DEFAULT_LARGE_IMAGE_KEY = "li_1";
@@ -257,7 +260,13 @@ namespace Dalamud.RichPresence
                     return;
                 }
 
-                var territoryId = ClientState.TerritoryType;
+                uint territoryId = ClientState.TerritoryType;
+                if (HousingInfo is not null && HousingInfo->IsInside())
+                {
+                    territoryId = TerritoryTypeSheet.GetRow(HousingManager.GetOriginalHouseTerritoryTypeId()).RowId;
+                }
+
+
                 var territoryName = LocalizationManager.Localize("DalamudRichPresenceTheSource", LocalizationLanguage.Client);
                 var territoryRegion = LocalizationManager.Localize("DalamudRichPresenceVoid", LocalizationLanguage.Client);
 
@@ -400,7 +409,7 @@ namespace Dalamud.RichPresence
                     {
                         var ipCrossRealm = InfoProxyCrossRealm.Instance();
 
-                        if (ipCrossRealm->IsInCrossRealmParty == 0x01)
+                        if (ipCrossRealm->IsInCrossRealmParty)
                         {
                             var numMembers =
                                 InfoProxyCrossRealm.GetGroupMemberCount(ipCrossRealm->LocalPlayerGroupIndex);

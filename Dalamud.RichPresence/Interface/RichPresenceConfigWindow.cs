@@ -1,6 +1,6 @@
 using System.Numerics;
 using Dalamud.Interface.Colors;
-using ImGuiNET;
+using Dalamud.Bindings.ImGui;
 
 using Dalamud.RichPresence.Configuration;
 using Dalamud.RichPresence.Models;
