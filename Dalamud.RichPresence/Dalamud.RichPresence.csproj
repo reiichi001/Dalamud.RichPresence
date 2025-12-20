@@ -11,6 +11,7 @@
     </PropertyGroup>
     <ItemGroup>
         <PackageReference GeneratePathProperty="true" Include="DiscordRichPresence" Version="1.2.1.24" />
+        <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
     </ItemGroup>
 
     <ItemGroup>
