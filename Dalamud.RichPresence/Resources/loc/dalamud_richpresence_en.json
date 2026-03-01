@@ -71,6 +71,10 @@
     "message": "Always show home world",
     "description": "Dalamud.RichPresence.Configuration.AlwaysShowHomeWorld"
   },
+  "DalamudRichPresenceShowDataCenter": {
+    "message": "Show data center name",
+    "description": "Dalamud.RichPresence.Configuration.ShowDataCenter"
+  },
   "DalamudRichPresenceShowStartTime": {
     "message": "Show elapsed time in zones",
     "description": "Dalamud.RichPresence.Configuration.ShowStartTime"

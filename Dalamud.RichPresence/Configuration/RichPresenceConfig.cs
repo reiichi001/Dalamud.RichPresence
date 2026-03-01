@@ -16,6 +16,8 @@ namespace Dalamud.RichPresence.Configuration
         public bool ShowWorld = true;
         // Always show home world in details (even when on home world)
         public bool AlwaysShowHomeWorld = false;
+        // show data center name alongside world
+        public bool ShowDataCenter = false;
 
         // Show elapsed time in zones
         public bool ShowStartTime = false;
