@@ -111,6 +111,10 @@
     "message": "Hide rich presence status entirely when AFK",
     "description": "Dalamud.RichPresence.Configuration.HideEntirelyWhenAfk"
   },
+  "DalamudRichPresenceHideInCutscene": {
+    "message": "Hide rich presence during cutscenes",
+    "description": "Dalamud.RichPresence.Configuration.HideInCutscene"
+  },
   "DalamudRichPresenceInLoginQueue": {
     "message": "In Login Queue (#{0})",
     "description": "Dalamud.RichPresence.Details.InLoginQueue"
