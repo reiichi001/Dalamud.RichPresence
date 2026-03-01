@@ -14,6 +14,8 @@ namespace Dalamud.RichPresence.Configuration
         public bool ShowFreeCompany = true;
         // Show world name
         public bool ShowWorld = true;
+        // Always show home world in details (even when on home world)
+        public bool AlwaysShowHomeWorld = false;
 
         // Show elapsed time in zones
         public bool ShowStartTime = false;

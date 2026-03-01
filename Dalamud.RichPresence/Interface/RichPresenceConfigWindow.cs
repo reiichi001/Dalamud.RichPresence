@@ -46,6 +46,7 @@ namespace Dalamud.RichPresence.Interface
                 ImGui.Checkbox(RichPresencePlugin.LocalizationManager.Localize("DalamudRichPresenceShowName", LocalizationLanguage.Plugin), ref RichPresenceConfig.ShowName);
                 ImGui.Checkbox(RichPresencePlugin.LocalizationManager.Localize("DalamudRichPresenceShowFreeCompany", LocalizationLanguage.Plugin), ref RichPresenceConfig.ShowFreeCompany);
                 ImGui.Checkbox(RichPresencePlugin.LocalizationManager.Localize("DalamudRichPresenceShowWorld", LocalizationLanguage.Plugin), ref RichPresenceConfig.ShowWorld);
+                ImGui.Checkbox(RichPresencePlugin.LocalizationManager.Localize("DalamudRichPresenceAlwaysShowHomeWorld", LocalizationLanguage.Plugin), ref RichPresenceConfig.AlwaysShowHomeWorld);
                 ImGui.Separator();
                 ImGui.Checkbox(RichPresencePlugin.LocalizationManager.Localize("DalamudRichPresenceShowStartTime", LocalizationLanguage.Plugin), ref RichPresenceConfig.ShowStartTime);
                 ImGui.Checkbox(RichPresencePlugin.LocalizationManager.Localize("DalamudRichPresenceResetTimeWhenChangingZones", LocalizationLanguage.Plugin), ref RichPresenceConfig.ResetTimeWhenChangingZones);
