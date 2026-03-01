@@ -62,6 +62,7 @@ namespace Dalamud.RichPresence.Interface
                 ImGui.Checkbox(RichPresencePlugin.LocalizationManager.Localize("DalamudRichPresenceShowParty", LocalizationLanguage.Plugin), ref RichPresenceConfig.ShowParty);
                 ImGui.Checkbox(RichPresencePlugin.LocalizationManager.Localize("DalamudRichPresenceShowAFK", LocalizationLanguage.Plugin), ref RichPresenceConfig.ShowAfk);
                 ImGui.Checkbox(RichPresencePlugin.LocalizationManager.Localize("DalamudRichPresenceHideAFKEntirely", LocalizationLanguage.Plugin), ref RichPresenceConfig.HideEntirelyWhenAfk);
+                ImGui.Checkbox(RichPresencePlugin.LocalizationManager.Localize("DalamudRichPresenceHideInCutscene", LocalizationLanguage.Plugin), ref RichPresenceConfig.HideInCutscene);
 
                 if (Util.IsWine())
                 {

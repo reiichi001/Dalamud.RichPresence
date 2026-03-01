@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using Dalamud.Game;
+using Dalamud.Game.ClientState.Conditions;
 using Dalamud.Game.Command;
 using Dalamud.IoC;
 using Dalamud.Plugin;
@@ -44,6 +45,9 @@ namespace Dalamud.RichPresence
 
         [PluginService]
         internal static IPluginLog PluginLog { get; private set; } = null!;
+
+        [PluginService]
+        internal static ICondition Condition { get; private set; } = null!;
 
         internal static LocalizationManager? LocalizationManager { get; private set; }
         internal static DiscordPresenceManager? DiscordPresenceManager { get; private set; }
@@ -457,6 +461,16 @@ namespace Dalamud.RichPresence
                     var text = onlineStatusEn;
                     richPresence.State = text;
                     richPresence.Assets.SmallImageKey = "away";
+                }
+
+                // hide presence in cutscenes to avoid zone spoilers
+                var inCutscene = Condition[ConditionFlag.OccupiedInCutSceneEvent]
+                    || Condition[ConditionFlag.WatchingCutscene]
+                    || Condition[ConditionFlag.WatchingCutscene78];
+                if (RichPresenceConfig.HideInCutscene && inCutscene)
+                {
+                    DiscordPresenceManager.ClearPresence();
+                    return;
                 }
 
                 if (RichPresenceConfig.HideEntirelyWhenAfk && isAfk)
