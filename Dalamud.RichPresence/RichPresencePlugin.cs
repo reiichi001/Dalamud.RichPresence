@@ -304,18 +304,21 @@ namespace Dalamud.RichPresence
                     
                     //TODO: Fix this
 
-                    // Show free company tag if configured
+                    // Show free company tag if configured and on home world
                     if (RichPresenceConfig.ShowFreeCompany && localPlayer.CurrentWorld.RowId == localPlayer.HomeWorld.RowId)
                     {
                         var fcTag = localPlayer.CompanyTag.TextValue;
-
-                        // Append free company tag to player name if it exists
                         richPresenceDetails = string.IsNullOrEmpty(fcTag) ? richPresenceDetails : $"{richPresenceDetails} «{fcTag}»";
                     }
-                    else if (RichPresenceConfig.ShowWorld && localPlayer.CurrentWorld.RowId != localPlayer.HomeWorld.RowId)
+
+                    // show home world in details - when visiting another world, or always if configured
+                    if (RichPresenceConfig.ShowWorld && localPlayer.CurrentWorld.RowId != localPlayer.HomeWorld.RowId)
                     {
-                        // Append home world name to current player name while visiting another world
-                        richPresenceDetails = $"{richPresenceDetails} ❀ {localPlayer.HomeWorld.Value.Name}";                       
+                        richPresenceDetails = $"{richPresenceDetails} ❀ {localPlayer.HomeWorld.Value.Name}";
+                    }
+                    else if (RichPresenceConfig.AlwaysShowHomeWorld)
+                    {
+                        richPresenceDetails = $"{richPresenceDetails} ❀ {localPlayer.HomeWorld.Value.Name}";
                     }
                 }
                 else
