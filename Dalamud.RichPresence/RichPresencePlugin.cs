@@ -276,6 +276,13 @@ namespace Dalamud.RichPresence
                 // State defaults to current world
                 var richPresenceState = localPlayer.CurrentWorld.Value.Name.ExtractText();
 
+                // append data center name if configured
+                if (RichPresenceConfig.ShowDataCenter)
+                {
+                    var dcName = localPlayer.CurrentWorld.Value.DataCenter.Value.Name.ExtractText();
+                    richPresenceState = $"{richPresenceState} ({dcName})";
+                }
+
                 // Large image defaults to world map
                 var richPresenceLargeImageText = territoryName;
                 var richPresenceLargeImageKey = DEFAULT_LARGE_IMAGE_KEY;
