@@ -17,6 +17,16 @@ namespace Dalamud.RichPresence.Interface
         public RichPresenceConfigWindow()
         {
             RichPresenceConfig = RichPresencePlugin.DalamudPluginInterface.GetPluginConfig() as RichPresenceConfig ?? new RichPresenceConfig();
+
+            if (RichPresenceConfig.Version < 2)
+            {
+                RichPresenceConfig.ShowDutyInsteadOfTerritory = false;
+                RichPresenceConfig.Version = 2;
+                RichPresencePlugin.RichPresenceConfig = this.RichPresenceConfig;
+                RichPresencePlugin.DalamudPluginInterface.SavePluginConfig(this.RichPresenceConfig);
+                
+
+            }
         }
 
         public void DrawRichPresenceConfigWindow()
@@ -46,6 +56,7 @@ namespace Dalamud.RichPresence.Interface
                 ImGui.Checkbox(RichPresencePlugin.LocalizationManager.Localize("DalamudRichPresenceShowName", LocalizationLanguage.Plugin), ref RichPresenceConfig.ShowName);
                 ImGui.Checkbox(RichPresencePlugin.LocalizationManager.Localize("DalamudRichPresenceShowFreeCompany", LocalizationLanguage.Plugin), ref RichPresenceConfig.ShowFreeCompany);
                 ImGui.Checkbox(RichPresencePlugin.LocalizationManager.Localize("DalamudRichPresenceShowWorld", LocalizationLanguage.Plugin), ref RichPresenceConfig.ShowWorld);
+                ImGui.Checkbox("Show duty name instead of territory", ref RichPresenceConfig.ShowDutyInsteadOfTerritory);
                 ImGui.Separator();
                 ImGui.Checkbox(RichPresencePlugin.LocalizationManager.Localize("DalamudRichPresenceShowStartTime", LocalizationLanguage.Plugin), ref RichPresenceConfig.ShowStartTime);
                 ImGui.Checkbox(RichPresencePlugin.LocalizationManager.Localize("DalamudRichPresenceResetTimeWhenChangingZones", LocalizationLanguage.Plugin), ref RichPresenceConfig.ResetTimeWhenChangingZones);

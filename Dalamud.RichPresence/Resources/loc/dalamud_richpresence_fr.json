@@ -51,6 +51,10 @@
     "message": "Afficher le nom du Monde",
     "description": "Dalamud.RichPresence.Configuration.ShowWorld"
   },
+  "DalamudRichPresenceShowDutyInsteadOfTerritory": {
+    "message": "Show duty name instead of territory",
+    "description": "Dalamud.RichPresence.Configuration.ShowDutyInsteadOfTerritory"
+  },
   "DalamudRichPresenceShowStartTime": {
     "message": "Afficher le temps écoulé dans les zones",
     "description": "Dalamud.RichPresence.Configuration.ShowStartTime"

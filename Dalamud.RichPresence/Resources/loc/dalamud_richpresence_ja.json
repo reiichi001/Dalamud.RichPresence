@@ -51,6 +51,10 @@
     "message": "Show world name",
     "description": "Dalamud.RichPresence.Configuration.ShowWorld"
   },
+  "DalamudRichPresenceShowDutyInsteadOfTerritory": {
+    "message": "Show duty name instead of territory",
+    "description": "Dalamud.RichPresence.Configuration.ShowDutyInsteadOfTerritory"
+  },
   "DalamudRichPresenceShowStartTime": {
     "message": "Show elapsed time in zones",
     "description": "Dalamud.RichPresence.Configuration.ShowStartTime"

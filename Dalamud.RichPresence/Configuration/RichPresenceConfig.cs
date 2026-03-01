@@ -4,7 +4,7 @@ namespace Dalamud.RichPresence.Configuration
 {
     class RichPresenceConfig : IPluginConfiguration
     {
-        public int Version { get; set; } = 1;
+        public int Version { get; set; } = 2;
 
         // Show login queue position
         public bool ShowLoginQueuePosition = true;
@@ -14,6 +14,8 @@ namespace Dalamud.RichPresence.Configuration
         public bool ShowFreeCompany = true;
         // Show world name
         public bool ShowWorld = true;
+        // Show Duty instead of Territory
+        public bool ShowDutyInsteadOfTerritory = false;
 
         // Show elapsed time in zones
         public bool ShowStartTime = false;

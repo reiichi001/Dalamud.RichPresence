@@ -19,6 +19,7 @@ using Dalamud.RichPresence.Models;
 using System.Xml.Linq;
 using Lumina.Extensions;
 using FFXIVClientStructs.FFXIV.Client.Game;
+using Dalamud.Utility;
 
 namespace Dalamud.RichPresence
 {
@@ -81,7 +82,7 @@ namespace Dalamud.RichPresence
         {
             RichPresenceConfig = DalamudPluginInterface.GetPluginConfig() as RichPresenceConfig ?? new RichPresenceConfig();
 
-            DiscordPresenceManager = new DiscordPresenceManager();
+                        DiscordPresenceManager = new DiscordPresenceManager();
             LocalizationManager = new LocalizationManager();
             IpcManager = new IpcManager();
             SetDefaultPresence();
@@ -261,6 +262,10 @@ namespace Dalamud.RichPresence
                 }
 
                 uint territoryId = ClientState.TerritoryType;
+                var cfcTerri = ContentFinderConditionSheet!.FirstOrNull(x => x.TerritoryType.RowId == ClientState.TerritoryType);
+
+
+
                 if (HousingInfo is not null && HousingInfo->IsInside())
                 {
                     territoryId = TerritoryTypeSheet.GetRow(HousingManager.GetOriginalHouseTerritoryTypeId()).RowId;
@@ -269,6 +274,13 @@ namespace Dalamud.RichPresence
 
                 var territoryName = LocalizationManager.Localize("DalamudRichPresenceTheSource", LocalizationLanguage.Client);
                 var territoryRegion = LocalizationManager.Localize("DalamudRichPresenceVoid", LocalizationLanguage.Client);
+                var dutyName = string.Empty;
+
+                if (cfcTerri != null)
+                {
+                    dutyName = cfcTerri.Value.Name.ExtractText();
+                }
+
 
                 // Details defaults to player name
                 var richPresenceDetails = localPlayer.Name.ToString();
@@ -293,6 +305,27 @@ namespace Dalamud.RichPresence
 
                     // Set large image to territory
                     richPresenceLargeImageText = territoryName;
+
+                    //TODO: set large image text to duty name via config option
+                    richPresenceLargeImageText = RichPresenceConfig.ShowDutyInsteadOfTerritory ?
+                        !dutyName.IsNullOrEmpty() ? dutyName ?? "Alt text really screwed up" : territoryName
+                    : territoryName;
+                    /*
+                    if (RichPresenceConfig.ShowDutyInsteadOfTerritory)
+                    {
+
+                        if (!dutyName.IsNullOrEmpty())
+                        {
+                            richPresenceLargeImageText = dutyName ?? "soemthing messed up alt text";
+                        }
+                        else
+                        {
+                            richPresenceLargeImageText = territoryName;
+                        }
+                    }
+                    */
+                    
+
                     richPresenceLargeImageKey = $"li_{territory.LoadingImage.RowId}";
                 }
 
@@ -317,11 +350,25 @@ namespace Dalamud.RichPresence
                         // Append home world name to current player name while visiting another world
                         richPresenceDetails = $"{richPresenceDetails} ❀ {localPlayer.HomeWorld.Value.Name}";                       
                     }
+
+                    // show duty names instead of territory, when configured and applicable
+                    if (RichPresenceConfig.ShowDutyInsteadOfTerritory)
+                    {
+                        if (!dutyName.IsNullOrEmpty())
+                        {
+                            richPresenceState = dutyName ?? "soemthing messed up";
+                        }
+                        else
+                        {
+                            richPresenceState = territoryName;
+                        }
+                    }
                 }
                 else
                 {
                     // Replace character name with territory name
                     richPresenceDetails = territoryName;
+                    
                 }
 
                 // Show current job if configured
@@ -349,28 +396,48 @@ namespace Dalamud.RichPresence
                 {
                     // Replace world name with territory name or territory region
                     richPresenceState = RichPresenceConfig.ShowName ? territoryName : territoryRegion;
+
+                    if (RichPresenceConfig.ShowDutyInsteadOfTerritory)
+                    {
+                        if (!dutyName.IsNullOrEmpty())
+                        {
+                            richPresenceState = dutyName ?? "DutyName broke State";
+                        }
+                    }
+                }
+                else
+                {
+                    if (RichPresenceConfig.ShowDutyInsteadOfTerritory)
+                    {
+                        if (!dutyName.IsNullOrEmpty())
+                        {
+                            richPresenceDetails = dutyName ?? "DutyName broke Details";
+                            // World occupies State
+                        }
+                    }
                 }
 
-                // Create rich presence object
-                richPresence = new DiscordRPC.RichPresence
-                {
-                    Details = richPresenceDetails,
-                    State = richPresenceState,
-                     Assets = new Assets
+
+                    // Create rich presence object
+                    richPresence = new DiscordRPC.RichPresence
                     {
-                        LargeImageKey = richPresenceLargeImageKey,
-                        LargeImageText = richPresenceLargeImageText,
-                        SmallImageKey = richPresenceSmallImageKey,
-                        SmallImageText = richPresenceSmallImageText,
-                    },
-                    Timestamps = richPresenceTimestamps,
-                };
+                        Details = richPresenceDetails,
+                        State = richPresenceState,
+                        Assets = new Assets
+                        {
+                            LargeImageKey = richPresenceLargeImageKey,
+                            LargeImageText = richPresenceLargeImageText,
+                            SmallImageKey = richPresenceSmallImageKey,
+                            SmallImageText = richPresenceSmallImageText,
+                        },
+                        Timestamps = richPresenceTimestamps,
+                    };
 
                 if (RichPresenceConfig.ShowParty)
                 {
                     if (PartyList.Length > 0 && PartyList.PartyId != 0)
                     {
-                        var cfcTerri = ContentFinderConditionSheet!.FirstOrNull(x => x.TerritoryType.RowId == ClientState.TerritoryType);
+                        
 
                         #if DEBUG
                         if (cfcTerri != null)

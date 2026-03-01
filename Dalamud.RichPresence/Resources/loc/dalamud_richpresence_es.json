@@ -51,6 +51,10 @@
     "message": "Mostrar nombre de servidor",
     "description": "Dalamud.RichPresence.Configuration.ShowWorld"
   },
+  "DalamudRichPresenceShowDutyInsteadOfTerritory": {
+    "message": "Show duty name instead of territory",
+    "description": "Dalamud.RichPresence.Configuration.ShowDutyInsteadOfTerritory"
+  },
   "DalamudRichPresenceShowStartTime": {
     "message": "Mostrar tiempo transcurrido en zonas",
     "description": "Dalamud.RichPresence.Configuration.ShowStartTime"
