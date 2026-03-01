@@ -16,7 +16,6 @@ using Dalamud.RichPresence.Configuration;
 using Dalamud.RichPresence.Interface;
 using Dalamud.RichPresence.Managers;
 using Dalamud.RichPresence.Models;
-using System.Xml.Linq;
 using Lumina.Extensions;
 using FFXIVClientStructs.FFXIV.Client.Game;
 
@@ -299,11 +298,6 @@ namespace Dalamud.RichPresence
                 // Show character name if configured
                 if (RichPresenceConfig.ShowName)
                 {
-                    //PluginLog.Info($"localPlayer.CurrentWorld: {localPlayer.CurrentWorld.RowId} {localPlayer.CurrentWorld.Value.Name}");
-                    //PluginLog.Info($"localPlayer.HomeWorld: {WorldSheet.GetRow(localPlayer.HomeWorld.RowId).Name} ");
-                    
-                    //TODO: Fix this
-
                     // Show free company tag if configured and on home world
                     if (RichPresenceConfig.ShowFreeCompany && localPlayer.CurrentWorld.RowId == localPlayer.HomeWorld.RowId)
                     {
@@ -394,10 +388,7 @@ namespace Dalamud.RichPresence
                             partyMax = PartyList.Length;
                         }
 
-                        //if (cfcTerri != null)
-                        //{
                             richPresence.State = LocalizationManager.Localize("DalamudRichPresenceInADuty", LocalizationLanguage.Client);
-                        //}
 
                         var party = new Party
                         {
@@ -439,9 +430,6 @@ namespace Dalamud.RichPresence
                 }
 
 
-                // var onlineStatusEn = localPlayer.OnlineStatus.GetWithLanguage(ClientLanguage.English);
-                // var isAfk = onlineStatusEn != null && onlineStatusEn.Name.RawString.Contains("Away from Keyboard");
-                // Data.GetExcelSheet<Item>(ClientLanguage.English);
                 var OnlineStatusSheetEn = DataManager.GetExcelSheet<OnlineStatus>(ClientLanguage.English);
                 var onlineStatusEn = OnlineStatusSheetEn.GetRow(localPlayer.OnlineStatus.RowId).Name.ExtractText();
                 var isAfk = onlineStatusEn != null && onlineStatusEn.Contains("Away from Keyboard");
